@@ -22,7 +22,7 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
-            description = "output format: stylish, plain [default: stylish]",
+            description = "output format: stylish, plain, json [default: stylish]",
             defaultValue = "stylish",
             showDefaultValue = Visibility.NEVER)
     private String format;

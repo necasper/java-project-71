@@ -19,3 +19,6 @@ stylish:
 
 plain:
 ![img_4.png](app/src/main/resources/img_4.png)
+
+json:
+![img_5.png](app/src/main/resources/img_5.png)
