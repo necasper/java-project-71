@@ -3,7 +3,7 @@ plugins {
     application
     checkstyle
     jacoco
-    id("org.sonarqube") version "7.2.0.6526"
+    id("org.sonarqube") version "7.3.0.8198"
     kotlin("kapt") version "2.3.20"
 }
 
@@ -46,10 +46,18 @@ tasks.jacocoTestReport {
 
 sonar {
     properties {
-        property("sonar.projectKey", "necasper_java-project-71")
-        property("sonar.organization", "necasper")
+        val projectKey = System.getenv("SONAR_PROJECT_KEY")?.takeIf { it.isNotBlank() }
+            ?: "necasper_java-project-71"
+        val organization = System.getenv("SONAR_ORGANIZATION")?.takeIf { it.isNotBlank() }
+            ?: "necasper"
+        property("sonar.projectKey", projectKey)
+        property("sonar.organization", organization)
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+        System.getenv("SONAR_TOKEN")?.takeIf { it.isNotBlank() }?.let { token ->
+            property("sonar.token", token)
+            property("sonar.login", token)
+        }
     }
 }
 

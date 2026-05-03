@@ -36,6 +36,15 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Require SonarCloud token
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -z "$SONAR_TOKEN" ]; then
+            echo "::error::SONAR_TOKEN is empty. Add repository secret SONAR_TOKEN (SonarCloud: Account → Security → Generate token). Pull requests from forks cannot use repository secrets."
+            exit 1
+          fi
+
       - name: Analyze on SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
