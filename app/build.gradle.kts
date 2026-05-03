@@ -46,7 +46,7 @@ tasks.jacocoTestReport {
 
 sonar {
     properties {
-        property("sonar.projectKey", "necasper_java-project-71")
+        property("sonar.projectKey", "java-project-71")
         property("sonar.organization", "necasper")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
