@@ -10,4 +10,4 @@
 
 ![img.png](app/src/main/resources/img.png)
 
-![img.png](img_2.png)
+![img_2.png](app/src/main/resources/img_2.png)
