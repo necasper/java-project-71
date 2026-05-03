@@ -3,15 +3,15 @@ run-dist:
 	@.\build\install\app\bin\app
 
 build:
-	./gradlew build
+	@.\gradlew build
 
 test:
-	./gradlew test
+	@.\gradlew test
 
 lint:
-	./gradlew checkstyleMain checkstyleTest
+	@.\gradlew checkstyleMain checkstyleTest
 
 report:
-	./gradlew jacocoTestReport
+	@.\gradlew jacocoTestReport
 
 .PHONY: build
