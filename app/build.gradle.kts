@@ -44,9 +44,6 @@ tasks.jacocoTestReport {
     }
 }
 
-plugins {
-}
-
 sonar {
     properties {
 
