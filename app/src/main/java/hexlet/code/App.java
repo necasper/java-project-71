@@ -22,7 +22,7 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
-            description = "output format [default: stylish]",
+            description = "output format: stylish [default: stylish]",
             defaultValue = "stylish",
             showDefaultValue = Visibility.NEVER)
     private String format;
@@ -31,7 +31,7 @@ public class App implements Callable<Integer> {
     public Integer call() throws Exception {
         Map<String, Object> data1 = Parser.getData(Parser.readFile(filepath1), filepath1);
         Map<String, Object> data2 = Parser.getData(Parser.readFile(filepath2), filepath2);
-        String diff = Differ.generate(data1, data2);
+        String diff = Differ.generate(data1, data2, format);
         System.out.println(diff);
         return 0;
     }

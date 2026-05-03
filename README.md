@@ -8,6 +8,11 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=necasper_java-project-71&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=necasper_java-project-71)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=necasper_java-project-71&metric=coverage)](https://sonarcloud.io/summary/new_code?id=necasper_java-project-71)
 
+json:
 ![img.png](app/src/main/resources/img.png)
 
+yml:
 ![img_2.png](app/src/main/resources/img_2.png)
+
+stylish:
+![img_3.png](app/src/main/resources/img_3.png)
