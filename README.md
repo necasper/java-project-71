@@ -9,3 +9,5 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=necasper_java-project-71&metric=coverage)](https://sonarcloud.io/summary/new_code?id=necasper_java-project-71)
 
 ![img.png](app/src/main/resources/img.png)
+
+![img.png](img_2.png)

@@ -52,6 +52,6 @@ class FlatJsonComparisonTest {
             throw new IllegalStateException("Missing test resource: " + resourceName);
         }
         String path = Path.of(url.toURI()).toString();
-        return Parser.getData(Parser.readFile(path));
+        return Parser.getData(Parser.readFile(path), resourceName);
     }
 }
