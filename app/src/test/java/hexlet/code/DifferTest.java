@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DifferTest {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final int TIMEOUT_OLD = 50;
+    private static final int TIMEOUT_NEW = 20;
+    private static final int FLAT_JSON_DIFF_ENTRIES = 5;
 
     // 2 input formats (json, yml) * 4 output formats (default, stylish, plain, json)
 
@@ -102,7 +105,7 @@ class DifferTest {
         expected.add(record("removed", "follow", false, null, null));
         expected.add(record("unchanged", "host", "hexlet.io", null, null));
         expected.add(record("removed", "proxy", "123.234.53.22", null, null));
-        expected.add(record("changed", "timeout", null, 50, 20));
+        expected.add(record("changed", "timeout", null, TIMEOUT_OLD, TIMEOUT_NEW));
         expected.add(record("added", "verbose", true, null, null));
 
         assertEquals(expected, actual);
@@ -163,7 +166,7 @@ class DifferTest {
         JsonNode actual = MAPPER.readTree(Differ.generate(p1, p2, "json"));
 
         assertTrue(actual.isArray());
-        assertEquals(5, actual.size());
+        assertEquals(FLAT_JSON_DIFF_ENTRIES, actual.size());
         assertEquals("host", actual.get(1).get("key").asText());
         assertEquals("unchanged", actual.get(1).get("type").asText());
     }

@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
         customSynopsis = "gendiff [-hV] [-f=format] filepath1 filepath2",
         parameterListHeading = "",
         optionListHeading = "")
-public class App implements Callable<Integer> {
+public final class App implements Callable<Integer> {
 
     @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filepath1;
