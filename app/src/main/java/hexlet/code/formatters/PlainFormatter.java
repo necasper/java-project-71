@@ -23,18 +23,19 @@ public final class PlainFormatter {
     }
 
     private static void appendEntry(StringBuilder sb, DiffEntry entry) {
-        if (entry instanceof DiffEntry.Unchanged) {
+        if (entry.getType() == DiffEntry.Type.UNCHANGED) {
             return;
         }
-        if (entry instanceof DiffEntry.Removed(var key, var value)) {
+        String key = entry.getKey();
+        if (entry.getType() == DiffEntry.Type.REMOVED) {
             sb.append("Property '").append(key).append("' was removed\n");
-        } else if (entry instanceof DiffEntry.Added(var key, var value)) {
+        } else if (entry.getType() == DiffEntry.Type.ADDED) {
             sb.append("Property '").append(key).append("' was added with value: ")
-                    .append(formatPlainValue(value)).append('\n');
-        } else if (entry instanceof DiffEntry.Changed(var key, var oldValue, var newValue)) {
+                    .append(formatPlainValue(entry.getValue())).append('\n');
+        } else if (entry.getType() == DiffEntry.Type.CHANGED) {
             sb.append("Property '").append(key).append("' was updated. From ")
-                    .append(formatPlainValue(oldValue)).append(" to ")
-                    .append(formatPlainValue(newValue)).append('\n');
+                    .append(formatPlainValue(entry.getOldValue())).append(" to ")
+                    .append(formatPlainValue(entry.getNewValue())).append('\n');
         }
     }
 

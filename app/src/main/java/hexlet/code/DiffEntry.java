@@ -1,16 +1,61 @@
 package hexlet.code;
 
-public sealed interface DiffEntry {
+public final class DiffEntry {
 
-    record Unchanged(String key, Object value) implements DiffEntry {
+    public enum Type {
+        UNCHANGED,
+        REMOVED,
+        ADDED,
+        CHANGED
     }
 
-    record Removed(String key, Object value) implements DiffEntry {
+    private final Type type;
+    private final String key;
+    private final Object value;
+    private final Object oldValue;
+    private final Object newValue;
+
+    private DiffEntry(Type type, String key, Object value, Object oldValue, Object newValue) {
+        this.type = type;
+        this.key = key;
+        this.value = value;
+        this.oldValue = oldValue;
+        this.newValue = newValue;
     }
 
-    record Added(String key, Object value) implements DiffEntry {
+    public static DiffEntry unchanged(String key, Object value) {
+        return new DiffEntry(Type.UNCHANGED, key, value, null, null);
     }
 
-    record Changed(String key, Object oldValue, Object newValue) implements DiffEntry {
+    public static DiffEntry removed(String key, Object value) {
+        return new DiffEntry(Type.REMOVED, key, value, null, null);
+    }
+
+    public static DiffEntry added(String key, Object value) {
+        return new DiffEntry(Type.ADDED, key, value, null, null);
+    }
+
+    public static DiffEntry changed(String key, Object oldValue, Object newValue) {
+        return new DiffEntry(Type.CHANGED, key, null, oldValue, newValue);
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
+    public Object getOldValue() {
+        return oldValue;
+    }
+
+    public Object getNewValue() {
+        return newValue;
     }
 }

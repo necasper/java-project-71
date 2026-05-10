@@ -20,15 +20,16 @@ public final class StylishFormatter {
     }
 
     private static void appendEntry(StringBuilder sb, DiffEntry entry) {
-        if (entry instanceof DiffEntry.Unchanged(var key, var value)) {
-            sb.append("    ").append(key).append(": ").append(formatValue(value)).append('\n');
-        } else if (entry instanceof DiffEntry.Removed(var key, var value)) {
-            sb.append("  - ").append(key).append(": ").append(formatValue(value)).append('\n');
-        } else if (entry instanceof DiffEntry.Added(var key, var value)) {
-            sb.append("  + ").append(key).append(": ").append(formatValue(value)).append('\n');
-        } else if (entry instanceof DiffEntry.Changed(var key, var oldValue, var newValue)) {
-            sb.append("  - ").append(key).append(": ").append(formatValue(oldValue)).append('\n');
-            sb.append("  + ").append(key).append(": ").append(formatValue(newValue)).append('\n');
+        String key = entry.getKey();
+        if (entry.getType() == DiffEntry.Type.UNCHANGED) {
+            sb.append("    ").append(key).append(": ").append(formatValue(entry.getValue())).append('\n');
+        } else if (entry.getType() == DiffEntry.Type.REMOVED) {
+            sb.append("  - ").append(key).append(": ").append(formatValue(entry.getValue())).append('\n');
+        } else if (entry.getType() == DiffEntry.Type.ADDED) {
+            sb.append("  + ").append(key).append(": ").append(formatValue(entry.getValue())).append('\n');
+        } else if (entry.getType() == DiffEntry.Type.CHANGED) {
+            sb.append("  - ").append(key).append(": ").append(formatValue(entry.getOldValue())).append('\n');
+            sb.append("  + ").append(key).append(": ").append(formatValue(entry.getNewValue())).append('\n');
         }
     }
 

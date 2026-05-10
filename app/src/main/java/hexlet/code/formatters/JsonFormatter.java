@@ -33,35 +33,24 @@ public final class JsonFormatter {
     }
 
     private static Map<String, Object> toRecord(DiffEntry entry) {
-        if (entry instanceof DiffEntry.Unchanged(var key, var value)) {
-            Map<String, Object> m = new LinkedHashMap<>();
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("key", entry.getKey());
+        if (entry.getType() == DiffEntry.Type.UNCHANGED) {
             m.put("type", "unchanged");
-            m.put("key", key);
-            m.put("value", value);
-            return m;
-        }
-        if (entry instanceof DiffEntry.Removed(var key, var value)) {
-            Map<String, Object> m = new LinkedHashMap<>();
+            m.put("value", entry.getValue());
+        } else if (entry.getType() == DiffEntry.Type.REMOVED) {
             m.put("type", "removed");
-            m.put("key", key);
-            m.put("value", value);
-            return m;
-        }
-        if (entry instanceof DiffEntry.Added(var key, var value)) {
-            Map<String, Object> m = new LinkedHashMap<>();
+            m.put("value", entry.getValue());
+        } else if (entry.getType() == DiffEntry.Type.ADDED) {
             m.put("type", "added");
-            m.put("key", key);
-            m.put("value", value);
-            return m;
-        }
-        if (entry instanceof DiffEntry.Changed(var key, var oldValue, var newValue)) {
-            Map<String, Object> m = new LinkedHashMap<>();
+            m.put("value", entry.getValue());
+        } else if (entry.getType() == DiffEntry.Type.CHANGED) {
             m.put("type", "changed");
-            m.put("key", key);
-            m.put("oldValue", oldValue);
-            m.put("newValue", newValue);
-            return m;
+            m.put("oldValue", entry.getOldValue());
+            m.put("newValue", entry.getNewValue());
+        } else {
+            throw new IllegalStateException("Unknown type: " + entry.getType());
         }
-        throw new IllegalStateException("Unexpected entry: " + entry);
+        return m;
     }
 }

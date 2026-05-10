@@ -24,14 +24,14 @@ public final class DiffBuilder {
                 Object v1 = map1.get(key);
                 Object v2 = map2.get(key);
                 if (Objects.equals(v1, v2)) {
-                    result.add(new DiffEntry.Unchanged(key, v1));
+                    result.add(DiffEntry.unchanged(key, v1));
                 } else {
-                    result.add(new DiffEntry.Changed(key, v1, v2));
+                    result.add(DiffEntry.changed(key, v1, v2));
                 }
             } else if (in1) {
-                result.add(new DiffEntry.Removed(key, map1.get(key)));
+                result.add(DiffEntry.removed(key, map1.get(key)));
             } else {
-                result.add(new DiffEntry.Added(key, map2.get(key)));
+                result.add(DiffEntry.added(key, map2.get(key)));
             }
         }
         return result;
