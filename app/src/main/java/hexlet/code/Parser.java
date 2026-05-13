@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import java.util.Locale;
 import java.util.Map;
 
 public final class Parser {
@@ -14,14 +15,13 @@ public final class Parser {
     private Parser() {
     }
 
-    public static Map<String, Object> parse(String content, String formatName) throws Exception {
-        if (isYaml(formatName)) {
-            return YAML_MAPPER.readValue(content, new TypeReference<Map<String, Object>>() { });
-        }
-        return JSON_MAPPER.readValue(content, new TypeReference<Map<String, Object>>() { });
-    }
-
-    private static boolean isYaml(String formatName) {
-        return "yaml".equalsIgnoreCase(formatName) || "yml".equalsIgnoreCase(formatName);
+    public static Map<String, Object> parse(String content, String extension) throws Exception {
+        String ext = extension.toLowerCase(Locale.ROOT);
+        return switch (ext) {
+            case "yml", "yaml" -> YAML_MAPPER.readValue(
+                    content, new TypeReference<Map<String, Object>>() { });
+            default -> JSON_MAPPER.readValue(
+                    content, new TypeReference<Map<String, Object>>() { });
+        };
     }
 }

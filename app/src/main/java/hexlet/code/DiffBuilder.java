@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 public final class DiffBuilder {
@@ -12,7 +13,7 @@ public final class DiffBuilder {
     }
 
     public static List<DiffEntry> build(Map<String, Object> map1, Map<String, Object> map2) {
-        TreeSet<String> keys = new TreeSet<>();
+        SortedSet<String> keys = new TreeSet<>();
         keys.addAll(map1.keySet());
         keys.addAll(map2.keySet());
 

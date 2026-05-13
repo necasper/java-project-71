@@ -2,6 +2,7 @@ package hexlet.code;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 import java.util.Map;
 
 public final class Differ {
@@ -17,8 +18,8 @@ public final class Differ {
         // read
         String text1 = Files.readString(Path.of(path1));
         String text2 = Files.readString(Path.of(path2));
-        String inputFormat1 = detectFormatName(path1);
-        String inputFormat2 = detectFormatName(path2);
+        String inputFormat1 = extractExtension(path1);
+        String inputFormat2 = extractExtension(path2);
 
         // parse
         Map<String, Object> data1 = Parser.parse(text1, inputFormat1);
@@ -31,11 +32,13 @@ public final class Differ {
         return Formatter.format(diff, formatName);
     }
 
-    private static String detectFormatName(String path) {
-        String lower = path.toLowerCase();
-        if (lower.endsWith(".yml") || lower.endsWith(".yaml")) {
-            return "yaml";
+    static String extractExtension(String path) {
+        int slash = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
+        String name = slash >= 0 ? path.substring(slash + 1) : path;
+        int dot = name.lastIndexOf('.');
+        if (dot <= 0 || dot == name.length() - 1) {
+            return "";
         }
-        return "json";
+        return name.substring(dot + 1).toLowerCase(Locale.ROOT);
     }
 }

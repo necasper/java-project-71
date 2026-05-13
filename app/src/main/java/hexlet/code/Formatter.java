@@ -11,7 +11,7 @@ public final class Formatter {
     private Formatter() {
     }
 
-    public static String format(List<DiffEntry> diff, String formatName) {
+    public static String format(List<DiffEntry> diff, String formatName) throws Exception {
         return switch (formatName) {
             case "stylish" -> StylishFormatter.format(diff);
             case "plain" -> PlainFormatter.format(diff);

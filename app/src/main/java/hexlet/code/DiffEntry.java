@@ -1,5 +1,8 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public final class DiffEntry {
 
     public enum Type {
